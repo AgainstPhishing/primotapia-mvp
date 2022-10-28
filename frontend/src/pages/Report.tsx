@@ -1,3 +1,4 @@
+import * as React from 'react';
 import {
   Button,
   Container,
@@ -9,6 +10,7 @@ import {
   TextInput,
 } from '@mantine/core';
 import { DatePicker } from '@mantine/dates';
+import { ArweaveContext } from '../contexts/ArweaveContext';
 
 const useStyles = createStyles((theme) => ({
   root: {
@@ -33,6 +35,10 @@ const useStyles = createStyles((theme) => ({
 export default function Report() {
   // You can add these classes as classNames to any Mantine input, it will work the same
   const { classes } = useStyles();
+  const { send } = React.useContext(ArweaveContext);
+  const [address, setAddress] = React.useState('');
+  const [type, setType] = React.useState<string | null>(null);
+  const [description, setDescription] = React.useState('');
 
   return (
     <div>
@@ -44,6 +50,7 @@ export default function Report() {
                 label="Address"
                 placeholder="0x000..."
                 classNames={classes}
+                onChange={(e) => setAddress(e.target.value)}
               />
             </Grid.Col>
             <Grid.Col xs={2}>
@@ -54,6 +61,7 @@ export default function Report() {
                 //   placeholder="phishing.com"
                 label="Type"
                 classNames={classes}
+                onChange={setType}
               />
             </Grid.Col>
           </Grid>
@@ -64,9 +72,17 @@ export default function Report() {
           label="Description"
           placeholder="Why is it a phishing?"
           classNames={classes}
+          onChange={(e) => setDescription(e.target.value)}
         />
         <br />
-        <Button fullWidth>SEND</Button>
+        <Button
+          fullWidth
+          onClick={() => {
+            send(address, type, description);
+          }}
+        >
+          SEND
+        </Button>
       </Container>
     </div>
   );

@@ -9,6 +9,9 @@ export default function ArweaveCtxProvider({
 }: {
   children: React.ReactNode;
 }) {
+  const [address, setAddress] = React.useState('');
+  const CONTRACT_ADDRESS = '_O_8QWIifv6-Geo477zNVBJ2tHiBDTIq_WOZFTukwg0';
+
   const arweave = Arweave.init({
     host: 'arweave.net',
     port: 443,
@@ -17,8 +20,26 @@ export default function ArweaveCtxProvider({
 
   const warp = WarpFactory.forMainnet();
 
+  async function send(address: string, type: string, description: string) {
+    const contract = warp.contract(CONTRACT_ADDRESS).connect('use_wallet');
+    contract
+      .writeInteraction({
+        function: 'addToBlacklist',
+        type,
+        address,
+        description,
+      })
+      .then((originalTxId: any) => {
+        console.log('originalTxId', originalTxId);
+      });
+  }
+
+  React.useEffect(() => {
+    arweave.wallets.getAddress().then((address) => setAddress(address));
+  }, [arweave]);
+
   return (
-    <ArweaveContext.Provider value={{ arweave, warp }}>
+    <ArweaveContext.Provider value={{ arweave, warp, address, send }}>
       {children}
     </ArweaveContext.Provider>
   );

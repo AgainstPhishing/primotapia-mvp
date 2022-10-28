@@ -1,33 +1,30 @@
 import {
-  createStyles,
-  Header,
-  HoverCard,
-  Group,
-  Button,
-  UnstyledButton,
-  Text,
-  SimpleGrid,
-  ThemeIcon,
-  Anchor,
-  Divider,
-  Center,
   Box,
   Burger,
+  Button,
+  createStyles,
+  Divider,
   Drawer,
-  Collapse,
+  Group,
+  Header,
+  Image,
   ScrollArea,
+  Text,
+  ThemeIcon,
+  UnstyledButton,
 } from '@mantine/core';
-import { MantineLogo } from '@mantine/ds';
 import { useDisclosure } from '@mantine/hooks';
 import {
-  IconNotification,
-  IconCode,
   IconBook,
   IconChartPie3,
-  IconFingerprint,
+  IconCode,
   IconCoin,
-  IconChevronDown,
+  IconFingerprint,
+  IconNotification,
 } from '@tabler/icons';
+import * as React from 'react';
+import logo from '../assets/no-fishing.png';
+import { ArweaveContext } from '../contexts/ArweaveContext';
 
 const useStyles = createStyles((theme) => ({
   link: {
@@ -136,6 +133,7 @@ export default function Navbar() {
     useDisclosure(false);
   const [linksOpened, { toggle: toggleLinks }] = useDisclosure(false);
   const { classes, theme } = useStyles();
+  const { address } = React.useContext(ArweaveContext);
 
   const links = mockdata.map((item) => (
     <UnstyledButton className={classes.subLink} key={item.title}>
@@ -160,6 +158,7 @@ export default function Navbar() {
       <Header height={60} px="md">
         <Group position="apart" sx={{ height: '100%' }}>
           <Group>
+            <Image src={logo} width="40px" />
             <Text>Primotopia</Text>
           </Group>
 
@@ -177,7 +176,24 @@ export default function Navbar() {
           </Group>
 
           <Group className={classes.hiddenMobile}>
-            <Button>Connect Wallet</Button>
+            {address ? (
+              <Text>{address.toString()}</Text>
+            ) : (
+              <Button
+                onClick={() => {
+                  //   contract
+                  //     .writeInteraction({
+                  //       function: 'addAnnouncement',
+                  //       address: 'fdaflkdsaklf',
+                  //     })
+                  //     .then(({ originalTxId }: { originalTxId: any }) => {
+                  //       // window.location.href = '/'; // redirect to home after the announcement has been added
+                  //     });
+                }}
+              >
+                Connect Wallet
+              </Button>
+            )}
           </Group>
 
           <Burger
