@@ -149,7 +149,11 @@ import {
       <Box pb={120}>
         <Header height={60} px="md">
           <Group position="apart" sx={{ height: '100%' }}>
-            <MantineLogo size={30} />
+            <Group>
+                <Text>
+                    Primotopia
+                </Text>
+            </Group>
   
             <Group sx={{ height: '100%' }} spacing={0} className={classes.hiddenMobile}>
               <a href="#" className={classes.link}>
@@ -183,18 +187,6 @@ import {
   
             <a href="#" className={classes.link}>
               Home
-            </a>
-            <UnstyledButton className={classes.link} onClick={toggleLinks}>
-              <Center inline>
-                <Box component="span" mr={5}>
-                  Features
-                </Box>
-                <IconChevronDown size={16} color={theme.fn.primaryColor()} />
-              </Center>
-            </UnstyledButton>
-            <Collapse in={linksOpened}>{links}</Collapse>
-            <a href="#" className={classes.link}>
-              Learn
             </a>
             <a href="#" className={classes.link}>
               Academy
