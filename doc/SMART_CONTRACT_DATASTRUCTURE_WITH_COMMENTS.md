@@ -4,6 +4,8 @@ This is example smart contract of PRIMOTAPIA with comments.
 {
   "owner": "", // The owner ArWeave address
   "allowedAddresses": [{
+    // here is the address which can report without being verified
+    // however the report might be reverted by the owner
     "address": "HgNHqGmSTDb4eSldvWntP6s8nUk8tCiSP9-1l76thEY",
     "description": "The owner address"
   }],
