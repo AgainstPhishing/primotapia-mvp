@@ -11,7 +11,6 @@ This is example smart contract of PRIMOTAPIA with comments.
   }],
   "blacklist": [
     {
-      "type": "domain",
       /*
         types:
         - domain - website domain 
@@ -19,13 +18,20 @@ This is example smart contract of PRIMOTAPIA with comments.
         - profile - social media profile (ex. twitter.com/ethereum_phishing_profile)
         - wallet - wallet addresses (ex. 0x12312121231321312312312312312312312312)
       */
-      "address": "example.domains",
+      "type": "domain",
+
       // the address - example for type = domain
+      "address": "example.domains",
+
+      // description - with the reason of reporting and possible proofs
       "description": "This is fake ENS project website",
+
       // possible statuses: "confirmed", "reported", "rejected"
       "status": "confirmed",
+      
       // reporter ArWeave address
       "reportedBy": "HgNHqGmSTDb4eSldvWntP6s8nUk8tCiSP9-1l76thEY",
+      
       // UNIX Timestamp
       "reportedAt": "1666997666" 
     }
