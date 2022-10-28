@@ -4,6 +4,7 @@ import { chain, configureChains, createClient, WagmiConfig } from 'wagmi';
 import { publicProvider } from 'wagmi/providers/public';
 import './App.css';
 import Navbar from './components/Navbar';
+import ArweaveCtxProvider from './contexts/ArweaveContext';
 
 const { provider, webSocketProvider } = configureChains(
   [chain.mainnet, chain.polygon],
@@ -19,8 +20,10 @@ const client = createClient({
 function App() {
   return (
     <WagmiConfig client={client}>
-      <Navbar />
-      <Outlet />
+      <ArweaveCtxProvider>
+        <Navbar />
+        <Outlet />
+      </ArweaveCtxProvider>
     </WagmiConfig>
   );
 }

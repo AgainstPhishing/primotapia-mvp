@@ -9,22 +9,40 @@ export default function List({}) {
         <TableComponent
           data={[
             {
-              title: 'Foundation',
-              author: 'Isaac Asimov',
-              year: 1951,
-              reviews: {
-                positive: 2223,
-                negative: 259,
-              },
+              address: '0x9e9a2b7687B35bE7008A95b3b6173AA3fa9b4Ea9',
+              type: 'wallet address',
+              status: 'phishing',
+              description: 'bla bla bla',
+              reportedAt: new Date(),
+              reportedBy: '0xC3499348beB5679DDF8EC6dB182f7141E2B66D57',
+              option: false,
             },
             {
-              title: 'Frankenstein',
-              author: 'Mary Shelley',
-              year: 1818,
-              reviews: {
-                positive: 5677,
-                negative: 1265,
-              },
+              address: '0x9e9a2b7687B35bE7008A95b3b6173AA3fa9b4Ea9',
+              type: 'wallet address',
+              status: 'phishing',
+              description: 'bla bla bla',
+              reportedAt: new Date(),
+              reportedBy: '0xC3499348beB5679DDF8EC6dB182f7141E2B66D57',
+              option: false,
+            },
+            {
+              address: '0x9e9a2b7687B35bE7008A95b3b6173AA3fa9b4Ea9',
+              type: 'wallet address',
+              status: 'phishing',
+              description: 'bla bla bla',
+              reportedAt: new Date(),
+              reportedBy: '0xC3499348beB5679DDF8EC6dB182f7141E2B66D57',
+              option: false,
+            },
+            {
+              address: '0x9e9a2b7687B35bE7008A95b3b6173AA3fa9b4Ea9',
+              type: 'wallet address',
+              status: 'phishing',
+              description: 'bla bla bla',
+              reportedAt: new Date(),
+              reportedBy: '0xC3499348beB5679DDF8EC6dB182f7141E2B66D57',
+              option: false,
             },
           ]}
         />

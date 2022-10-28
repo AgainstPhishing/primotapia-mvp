@@ -168,10 +168,10 @@ export default function Navbar() {
             spacing={0}
             className={classes.hiddenMobile}
           >
-            <a href="#" className={classes.link}>
+            <a href="/list" className={classes.link}>
               Home
             </a>
-            <a href="#" className={classes.link}>
+            <a href="/report" className={classes.link}>
               Report
             </a>
           </Group>
@@ -203,10 +203,10 @@ export default function Navbar() {
             color={theme.colorScheme === 'dark' ? 'dark.5' : 'gray.1'}
           />
 
-          <a href="#" className={classes.link}>
+          <a href="/list" className={classes.link}>
             Home
           </a>
-          <a href="#" className={classes.link}>
+          <a href="/report" className={classes.link}>
             Report
           </a>
 
@@ -216,7 +216,6 @@ export default function Navbar() {
           />
 
           <Group position="center" grow pb="xl" px="md">
-            <Button variant="default">Log in</Button>
             <Button>Sign up</Button>
           </Group>
         </ScrollArea>
