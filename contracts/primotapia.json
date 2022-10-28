@@ -1,0 +1,17 @@
+{
+  "owner": "HgNHqGmSTDb4eSldvWntP6s8nUk8tCiSP9-1l76thEY",
+  "allowedAddresses": [{
+    "address": "HgNHqGmSTDb4eSldvWntP6s8nUk8tCiSP9-1l76thEY",
+    "description": "The owner address"
+  }],
+  "blacklist": [
+    {
+      "address": "ens-airdrop.domains",
+      "type": "domain",
+      "description": "This is fake ENS project website",
+      "status": "confirmed",
+      "reportedBy": "HgNHqGmSTDb4eSldvWntP6s8nUk8tCiSP9-1l76thEY",
+      "raportedAt": "2022-10-28 22:44:44"
+    }
+  ]
+}

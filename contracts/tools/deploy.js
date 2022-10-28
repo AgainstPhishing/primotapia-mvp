@@ -18,12 +18,12 @@ const jwk = JSON.parse(fs.readFileSync(
 ));
 
 const contractSrc = fs.readFileSync(
-    path.join(__dirname, '../arplace.js'),
+    path.join(__dirname, '../primotapia.js'),
     'utf8'
 );
   
 const initialState = fs.readFileSync(
-    path.join(__dirname, '../arplace.json'),
+    path.join(__dirname, '../primotapia.json'),
     'utf8'
 );
 
