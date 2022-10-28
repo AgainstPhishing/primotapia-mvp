@@ -1,32 +1,78 @@
 // It's the WARP smart contract for primotapia
 
+function getCurrentTimestamp() {
+  return Math.floor((new Date()).getTime() / 1000);
+}
+
+function isAddressAllowed(state, addressToCheck) {
+  return !!state.allowedAddress.find(address => address.address === addressToCheck);
+}
 
 const changeOwnership = async (
   state,
   { caller: _caller, input: { address } }
 ) => {
-  // TODO
-  return { state };
+  
+  
+  return { state: {
+    ...state,
+    owner: address
+  }};
 };
 
 const addToBlacklist = async (
   state,
-  { caller: _caller, input: { address } }
+  { caller: _caller, input: { type, address, description } }
 ) => {
-  // TODO
 
-  return { state };
+  // TODO
+  const status = isAddressAllowed(state, _caller) ? 'confirmed' : 'reported';
+
+  const blacklistItem = {
+    type,
+    address,
+    description,
+    status,
+    reportedBy: _caller,
+    reportedAt: getCurrentTimestamp()
+  }
+
+  const blacklist = [
+    ...state.blacklist,
+    blacklistItem
+  ];
+
+  return { state: {
+    ...state,
+    blacklist
+  } };
 };
 
 const approveToBlacklist = async (
   state,
-  { caller: _caller, input: { address } }
+  { caller: _caller, input: { type, address } }
 ) => {
-  // TODO
+
+  // if caller is allowed
+  if(!isAddressAllowed(state, _caller)) {
+    return { state };
+  }
+
+  const index = state.blacklist.findIndex(blacklistItem => blacklistItem.type === type && blacklistItem.address === address) 
+
+  if(index === -1) {
+    return { state };
+  }
+
+  const blacklist = { ...state.blacklist };
+  blacklist[index].status = 'confirmed';
 
   return {
-      state
-  };
+    state: {
+      ...state,
+      blacklist
+    }
+  }
 };
 
 const addAllowedAddress = async (

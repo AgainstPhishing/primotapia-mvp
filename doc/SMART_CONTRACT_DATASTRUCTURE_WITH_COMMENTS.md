@@ -26,8 +26,8 @@ This is example smart contract of PRIMOTAPIA with comments.
       "status": "confirmed",
       // reporter ArWeave address
       "reportedBy": "HgNHqGmSTDb4eSldvWntP6s8nUk8tCiSP9-1l76thEY",
-      // Time in UTC
-      "raportedAt": "2022-10-28 22:44:44" 
+      // UNIX Timestamp
+      "reportedAt": "1666997666" 
     }
   ]
 }
