@@ -1,19 +1,33 @@
-import { createStyles, Table, Progress, Anchor, Text, Group, ScrollArea } from '@mantine/core';
+import {
+  createStyles,
+  Table,
+  Progress,
+  Anchor,
+  Text,
+  Group,
+  ScrollArea,
+  Button,
+} from '@mantine/core';
 
 const useStyles = createStyles((theme) => ({
   progressBar: {
     '&:not(:first-of-type)': {
-      borderLeft: `3px solid ${theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.white}`,
+      borderLeft: `3px solid ${
+        theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.white
+      }`,
     },
   },
 }));
 
 interface TableReviewsProps {
   data: {
-    title: string;
-    author: string;
-    year: number;
-    reviews: { positive: number; negative: number };
+    address: string;
+    type: string;
+    status: string;
+    description: string;
+    reportedBy: string;
+    reportedAt: Date;
+    option: boolean;
   }[];
 }
 
@@ -21,47 +35,32 @@ export default function TableComponent({ data }: TableReviewsProps) {
   const { classes, theme } = useStyles();
 
   const rows = data.map((row) => {
-    const totalReviews = row.reviews.negative + row.reviews.positive;
-    const positiveReviews = (row.reviews.positive / totalReviews) * 100;
-    const negativeReviews = (row.reviews.negative / totalReviews) * 100;
+    // const totalReviews = row.reviews.negative + row.reviews.positive;
+    // const positiveReviews = (row.reviews.positive / totalReviews) * 100;
+    // const negativeReviews = (row.reviews.negative / totalReviews) * 100;
 
     return (
-      <tr key={row.title}>
+      <tr key={row.address}>
         <td>
           <Anchor<'a'> size="sm" onClick={(event) => event.preventDefault()}>
-            {row.title}
+            {`${row.address.slice(0, 12)}...${row.address.slice(
+              row.address.length - 4,
+              row.address.length
+            )}`}
           </Anchor>
         </td>
-        <td>{row.year}</td>
-        <td>
-          <Anchor<'a'> size="sm" onClick={(event) => event.preventDefault()}>
-            {row.author}
-          </Anchor>
-        </td>
-        <td>{Intl.NumberFormat().format(totalReviews)}</td>
-        <td>
-          <Group position="apart">
-            <Text size="xs" color="teal" weight={700}>
-              {positiveReviews.toFixed(0)}%
-            </Text>
-            <Text size="xs" color="red" weight={700}>
-              {negativeReviews.toFixed(0)}%
-            </Text>
-          </Group>
-          <Progress
-            classNames={{ bar: classes.progressBar }}
-            sections={[
-              {
-                value: positiveReviews,
-                color: theme.colorScheme === 'dark' ? theme.colors.teal[9] : theme.colors.teal[6],
-              },
-              {
-                value: negativeReviews,
-                color: theme.colorScheme === 'dark' ? theme.colors.red[9] : theme.colors.red[6],
-              },
-            ]}
-          />
-        </td>
+        <td>{row.type}</td>
+        <td>{row.status}</td>
+        <td>{row.description}</td>
+        <td>{row.reportedBy}</td>
+        <td>{row.reportedAt.toLocaleString()}</td>
+        {row.option ? (
+          <td>
+            <Button>Approve</Button>
+          </td>
+        ) : (
+          <></>
+        )}
       </tr>
     );
   });
@@ -71,11 +70,13 @@ export default function TableComponent({ data }: TableReviewsProps) {
       <Table sx={{ minWidth: 800 }} verticalSpacing="xs">
         <thead>
           <tr>
-            <th>Book title</th>
-            <th>Year</th>
-            <th>Author</th>
-            <th>Reviews</th>
-            <th>Reviews distribution</th>
+            <th>Address</th>
+            <th>Type</th>
+            <th>Status</th>
+            <th>Description</th>
+            <th>Created By</th>
+            <th>Created At</th>
+            {/* <th>Option</th> */}
           </tr>
         </thead>
         <tbody>{rows}</tbody>
