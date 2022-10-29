@@ -17,7 +17,7 @@ const port = 3001;
 app.get('/api/blacklist', async (req, res) => {
     const contract = warp.contract(contractTxId);
     const { cachedValue } = await contract.readState();
-    res.send(cachedValue.state.blacklist.reverse());
+    res.send(cachedValue.state.blacklist.reverse().filter(blacklistItem => blacklistItem.status === 'confirmed'));
 });
 
 app.listen(port, () => {
