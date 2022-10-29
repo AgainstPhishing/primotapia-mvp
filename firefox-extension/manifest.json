@@ -9,8 +9,8 @@
   },
   "web_accessible_resources": ["/pages/blockpage.html"],
   "permissions": [
-      "webRequest",
-      "webRequestBlocking",
-      "<all_urls>"
+    "webRequest",
+    "webRequestBlocking",
+    "<all_urls>"
   ]
 }
