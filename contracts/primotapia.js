@@ -5,7 +5,7 @@ function getCurrentTimestamp() {
 }
 
 function isAddressAllowed(state, addressToCheck) {
-  return !!state.allowedAddress.find(address => address.address === addressToCheck);
+  return !!state.allowedAddresses.find(address => address.address === addressToCheck);
 }
 
 const changeOwnership = async (
@@ -25,7 +25,6 @@ const addToBlacklist = async (
   { caller: _caller, input: { type, address, description } }
 ) => {
 
-  // TODO
   const status = isAddressAllowed(state, _caller) ? 'confirmed' : 'reported';
 
   const blacklistItem = {
@@ -64,8 +63,35 @@ const approveToBlacklist = async (
     return { state };
   }
 
-  const blacklist = { ...state.blacklist };
+  const blacklist = [ ...state.blacklist ];
   blacklist[index].status = 'confirmed';
+
+  return {
+    state: {
+      ...state,
+      blacklist
+    }
+  }
+};
+
+const rejectFromBlacklist = async (
+  state,
+  { caller: _caller, input: { type, address } }
+) => {
+
+  // if caller is allowed
+  if(!isAddressAllowed(state, _caller)) {
+    return { state };
+  }
+
+  const index = state.blacklist.findIndex(blacklistItem => blacklistItem.type === type && blacklistItem.address === address) 
+
+  if(index === -1) {
+    return { state };
+  }
+
+  const blacklist = [ ...state.blacklist ];
+  blacklist[index].status = 'rejected';
 
   return {
     state: {
@@ -101,8 +127,8 @@ export function handle(state, action){
       return addToBlacklist(state, action);
     case 'approveToBlacklist':
       return approveToBlacklist(state, action);
-    case 'revertFromBlacklist':
-      return revertFromBlacklist(state, action);
+    case 'rejectFromBlacklist':
+      return rejectFromBlacklist(state, action);
     case 'addAllowedAddress':
       return addAllowedAddress(state, action);
     case 'removeAllowedAddress':

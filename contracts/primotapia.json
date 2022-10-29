@@ -16,6 +16,14 @@
       "status": "confirmed",
       "reportedBy": "HgNHqGmSTDb4eSldvWntP6s8nUk8tCiSP9-1l76thEY",
       "reportedAt": "1666997666"
+    },
+    {
+      "type": "wallet",
+      "address": "0x168165F3768a0ae21c0bF1b078C9AACa2ed33411",
+      "description": "It supposed to be is phishing related address. (in reality it's another owner wallet address added for test)",
+      "status": "confirmed",
+      "reportedBy": "HgNHqGmSTDb4eSldvWntP6s8nUk8tCiSP9-1l76thEY",
+      "reportedAt": "1666997666"
     }
   ]
 }
