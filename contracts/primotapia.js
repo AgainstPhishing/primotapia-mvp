@@ -8,6 +8,10 @@ function isAddressAllowed(state, addressToCheck) {
   return !!state.allowedAddresses.find(address => address.address === addressToCheck);
 }
 
+function isOwner(state, address) {
+  return state.owner === address;
+}
+
 const changeOwnership = async (
   state,
   { caller: _caller, input: { address } }
@@ -103,20 +107,41 @@ const rejectFromBlacklist = async (
 
 const addAllowedAddress = async (
   state,
-  { caller: _caller, input: { address } }
+  { caller: _caller, input: { address, description } }
 ) => {
-  // TODO
+  if(!isOwner(state, _caller)) {
+    return { state };
+  }
 
-  return { state };
+  const allowedAddresses = [ ...state.allowedAddresses, {
+    address,
+    description
+  } ];
+
+  return {
+    state: {
+      ...state,
+      allowedAddresses
+    }
+  }
 };
 
 const removeAllowedAddress = async (
   state,
   { caller: _caller, input: { address } }
 ) => {
-  // TODO
+  if(!isOwner(state, _caller)) {
+    return { state };
+  }
 
-  return { state };
+  const allowedAddresses = [ ...state.allowedAddresses ].filter(allowedAddress => allowedAddress.address != address);
+
+  return {
+    state: {
+      ...state,
+      allowedAddresses
+    }
+  }
 };
 
 export function handle(state, action){

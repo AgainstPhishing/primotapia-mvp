@@ -30,4 +30,4 @@ It's a prototype of browser extension which integrate WARP Smart Contract data w
 
 ### WARP Smart contract address
 
-**ANonubWMDDS7hK8dJVkQjU1SItCfT3baBxaHi72pa3s**
+**LoR8ujVUO0PDll-pbFMuvXRVXKtLjXAYjXqH_pFgmk8**
