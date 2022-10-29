@@ -10,6 +10,14 @@ import {
   Button,
 } from '@mantine/core';
 import { ArweaveContext } from '../contexts/ArweaveContext';
+import {
+  IconCheck,
+  IconCircleX,
+  IconNumbers,
+  IconSocial,
+  IconWallet,
+  IconWorldWww,
+} from '@tabler/icons';
 
 const useStyles = createStyles((theme) => ({
   progressBar: {
@@ -33,9 +41,20 @@ interface TableReviewsProps {
   }[];
 }
 
+const typeIcons: Record<string, any> = {
+  domain: <IconWorldWww />,
+  'wallet address': <IconWallet />,
+  wallet: <IconWallet />,
+  'Wallet Address': <IconWallet />,
+  IP: <IconNumbers />,
+  'social media': <IconSocial />,
+};
+const statusIcons = {};
+
 export default function TableComponent({ data }: TableReviewsProps) {
   const { classes, theme } = useStyles();
-  const { owner, approveToBlacklist } = React.useContext(ArweaveContext);
+  const { owner, rejectFromBlacklist, approveToBlacklist } =
+    React.useContext(ArweaveContext);
 
   const rows = data.map((row) => {
     // const totalReviews = row.reviews.negative + row.reviews.positive;
@@ -45,31 +64,51 @@ export default function TableComponent({ data }: TableReviewsProps) {
     return (
       <tr key={row.address}>
         <td>
-          <Anchor<'a'> size="sm" onClick={(event) => event.preventDefault()}>
+          <Anchor<'a'>
+            href={`https://viewblock.io/arweave/address/${row.address}`}
+            size="sm"
+            onClick={(event) => event.preventDefault()}
+          >
             {`${row.address.slice(0, 12)}...${row.address.slice(
               row.address.length - 4,
               row.address.length
             )}`}
           </Anchor>
         </td>
-        <td>{row.type}</td>
+        <td>
+          <Group>
+            {row.type} {typeIcons[row.type]}
+          </Group>
+        </td>
         <td>{row.status}</td>
-        <td>{row.description}</td>
-        <td>{row.reportedBy}</td>
+        <td>
+          <Text></Text>
+          {row.description}
+        </td>
+        <td>
+          {`${row.reportedBy.slice(0, 12)}...${row.reportedBy.slice(
+            row.reportedBy.length - 4,
+            row.reportedBy.length
+          )}`}
+        </td>
         <td>{new Date(row.reportedAt * 1000).toLocaleDateString()}</td>
         {owner && row.status === 'reported' ? (
           <td>
             <Button
-              fullWidth
               onClick={() => {
                 approveToBlacklist(row.type, row.address);
               }}
+              variant="outline"
             >
-              Approve
+              <IconCheck />
             </Button>
-            <br />
-            <Button color={'red'} fullWidth>
-              Reject
+            <Button
+              variant="outline"
+              onClick={() => {
+                rejectFromBlacklist(row.type, row.address);
+              }}
+            >
+              <IconCircleX />
             </Button>
           </td>
         ) : (

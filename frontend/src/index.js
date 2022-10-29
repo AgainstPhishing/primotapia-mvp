@@ -16,15 +16,37 @@ import {
   synthwave,
   retro,
 } from 'manthemes/daisyui';
+import { LandingPage } from './pages/LandingPage';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <MantineProvider theme={cupcake} withGlobalStyles withNormalizeCSS>
+    <MantineProvider
+      theme={{
+        colors: {
+          brand: [
+            '#F0BBDD',
+            '#ED9BCF',
+            '#EC7CC3',
+            '#ED5DB8',
+            '#F13EAF',
+            '#F71FA7',
+            '#FF00A1',
+            '#E00890',
+            '#C50E82',
+            '#AD1374',
+          ],
+        },
+        primaryColor: 'brand',
+      }}
+      withGlobalStyles
+      withNormalizeCSS
+    >
       <Router>
         <div>
           <Routes>
             <Route path="/" element={<App />}>
+              <Route path="/" element={<LandingPage />} />
               <Route path="/list" element={<List />} />
               <Route path="/report" element={<Report />} />
             </Route>

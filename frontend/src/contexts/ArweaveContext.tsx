@@ -13,7 +13,7 @@ export default function ArweaveCtxProvider({
   const [allowedAddresses, setAllowedAddresses] = React.useState([]);
   const [phishingList, setPhisingList] = React.useState([]);
 
-  const CONTRACT_ADDRESS = 'Dg3ghxtUNvd0W3MvsIEBThdg7KHTPVG_vTacZpGEHYg';
+  const CONTRACT_ADDRESS = 'ANonubWMDDS7hK8dJVkQjU1SItCfT3baBxaHi72pa3s';
 
   const arweave = Arweave.init({
     host: 'arweave.net',
@@ -27,7 +27,9 @@ export default function ArweaveCtxProvider({
     async function fetchData() {
       const contract = warp.contract(CONTRACT_ADDRESS).connect('use_wallet');
       const state = await contract.readState();
-      setPhisingList((state?.cachedValue?.state as any)['blacklist']);
+      setPhisingList(
+        Object.values((state?.cachedValue?.state as any)['blacklist'])
+      );
       setAllowedAddresses(
         (state?.cachedValue?.state as any)['allowedAddresses']
       );
@@ -35,6 +37,19 @@ export default function ArweaveCtxProvider({
     }
     fetchData();
   }, []);
+
+  async function rejectFromBlacklist(type: string, address: string) {
+    const contract = warp.contract(CONTRACT_ADDRESS).connect('use_wallet');
+    contract
+      .writeInteraction({
+        function: 'rejectFromBlacklist',
+        type,
+        address,
+      })
+      .then((originalTxId: any) => {
+        console.log('rejectFromBlacklist | originalTxId', originalTxId);
+      });
+  }
 
   async function approveToBlacklist(type: string, address: string) {
     const contract = warp.contract(CONTRACT_ADDRESS).connect('use_wallet');
@@ -80,6 +95,7 @@ export default function ArweaveCtxProvider({
             (allowed: any) => allowed.address === address
           ) !== undefined,
         approveToBlacklist,
+        rejectFromBlacklist,
       }}
     >
       {children}

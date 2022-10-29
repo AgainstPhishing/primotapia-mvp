@@ -158,10 +158,12 @@ export default function Navbar() {
     <Box pb={120}>
       <Header height={60} px="md">
         <Group position="apart" sx={{ height: '100%' }}>
-          <Group>
-            <Image src={logo} width="40px" />
-            <Text>Primotopia</Text>
-          </Group>
+          <Link to="/" style={{ textDecoration: 'none' }}>
+            <Group>
+              <Image src={logo} width="40px" color="white" />
+              <Text>Primotopia</Text>
+            </Group>
+          </Link>
 
           <Group
             sx={{ height: '100%' }}
@@ -178,7 +180,13 @@ export default function Navbar() {
 
           <Group className={classes.hiddenMobile}>
             {address ? (
-              <Text>{address.toString()}</Text>
+              <Text>
+                {' '}
+                {`${address.slice(0, 12)}...${address.slice(
+                  address.length - 4,
+                  address.length
+                )}`}
+              </Text>
             ) : (
               <Button
                 onClick={() => {
