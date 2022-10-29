@@ -56,8 +56,13 @@ export default function Report() {
             <Grid.Col xs={2}>
               <Select
                 style={{ zIndex: 2 }}
-                data={['Domain', 'Social Media', 'IP', 'Wallet Address']}
-                defaultValue={'Domain'}
+                data={[
+                  { value: 'domain', label: 'Domain' },
+                  { value: 'ip', label: 'IP Address' },
+                  { value: 'profile', label: 'Social Media' },
+                  { value: 'wallet', label: 'Wallet Address' },
+                ]}
+                defaultValue={'domain'}
                 //   placeholder="phishing.com"
                 label="Type"
                 classNames={classes}

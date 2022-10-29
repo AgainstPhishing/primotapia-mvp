@@ -49,7 +49,9 @@ const typeIcons: Record<string, any> = {
   wallet: <IconWallet />,
   'Wallet Address': <IconWallet />,
   IP: <IconNumbers />,
+  ip: <IconNumbers />,
   'social media': <IconSocial />,
+  profile: <IconSocial />,
 };
 
 const statusIcons: Record<string, any> = {
