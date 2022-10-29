@@ -25,6 +25,7 @@ import {
 import * as React from 'react';
 import logo from '../assets/no-fishing.png';
 import { ArweaveContext } from '../contexts/ArweaveContext';
+import { Link } from 'react-router-dom';
 
 const useStyles = createStyles((theme) => ({
   link: {
@@ -167,12 +168,12 @@ export default function Navbar() {
             spacing={0}
             className={classes.hiddenMobile}
           >
-            <a href="/list" className={classes.link}>
+            <Link to="/list" className={classes.link}>
               Home
-            </a>
-            <a href="/report" className={classes.link}>
+            </Link>
+            <Link to="/report" className={classes.link}>
               Report
-            </a>
+            </Link>
           </Group>
 
           <Group className={classes.hiddenMobile}>

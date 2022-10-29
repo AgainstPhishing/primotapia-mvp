@@ -1,3 +1,4 @@
+import * as React from 'react';
 import {
   createStyles,
   Table,
@@ -8,6 +9,7 @@ import {
   ScrollArea,
   Button,
 } from '@mantine/core';
+import { ArweaveContext } from '../contexts/ArweaveContext';
 
 const useStyles = createStyles((theme) => ({
   progressBar: {
@@ -26,13 +28,14 @@ interface TableReviewsProps {
     status: string;
     description: string;
     reportedBy: string;
-    reportedAt: Date;
+    reportedAt: number;
     option: boolean;
   }[];
 }
 
 export default function TableComponent({ data }: TableReviewsProps) {
   const { classes, theme } = useStyles();
+  const { owner, approveToBlacklist } = React.useContext(ArweaveContext);
 
   const rows = data.map((row) => {
     // const totalReviews = row.reviews.negative + row.reviews.positive;
@@ -53,10 +56,21 @@ export default function TableComponent({ data }: TableReviewsProps) {
         <td>{row.status}</td>
         <td>{row.description}</td>
         <td>{row.reportedBy}</td>
-        <td>{row.reportedAt.toLocaleString()}</td>
-        {row.option ? (
+        <td>{new Date(row.reportedAt * 1000).toLocaleDateString()}</td>
+        {owner && row.status === 'reported' ? (
           <td>
-            <Button>Approve</Button>
+            <Button
+              fullWidth
+              onClick={() => {
+                approveToBlacklist(row.type, row.address);
+              }}
+            >
+              Approve
+            </Button>
+            <br />
+            <Button color={'red'} fullWidth>
+              Reject
+            </Button>
           </td>
         ) : (
           <></>
