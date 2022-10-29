@@ -10,9 +10,10 @@ export default function ArweaveCtxProvider({
   children: React.ReactNode;
 }) {
   const [address, setAddress] = React.useState('');
+  const [allowedAddresses, setAllowedAddresses] = React.useState([]);
   const [phishingList, setPhisingList] = React.useState([]);
 
-  const CONTRACT_ADDRESS = '_O_8QWIifv6-Geo477zNVBJ2tHiBDTIq_WOZFTukwg0';
+  const CONTRACT_ADDRESS = 'Dg3ghxtUNvd0W3MvsIEBThdg7KHTPVG_vTacZpGEHYg';
 
   const arweave = Arweave.init({
     host: 'arweave.net',
@@ -27,10 +28,26 @@ export default function ArweaveCtxProvider({
       const contract = warp.contract(CONTRACT_ADDRESS).connect('use_wallet');
       const state = await contract.readState();
       setPhisingList((state?.cachedValue?.state as any)['blacklist']);
+      setAllowedAddresses(
+        (state?.cachedValue?.state as any)['allowedAddresses']
+      );
       console.log('state', state);
     }
     fetchData();
   }, []);
+
+  async function approveToBlacklist(type: string, address: string) {
+    const contract = warp.contract(CONTRACT_ADDRESS).connect('use_wallet');
+    contract
+      .writeInteraction({
+        function: 'approveToBlacklist',
+        type,
+        address,
+      })
+      .then((originalTxId: any) => {
+        console.log('approveToBlacklist | originalTxId', originalTxId);
+      });
+  }
 
   async function send(address: string, type: string, description: string) {
     const contract = warp.contract(CONTRACT_ADDRESS).connect('use_wallet');
@@ -42,7 +59,7 @@ export default function ArweaveCtxProvider({
         description,
       })
       .then((originalTxId: any) => {
-        console.log('originalTxId', originalTxId);
+        console.log('addToBlacklist | originalTxId', originalTxId);
       });
   }
 
@@ -52,7 +69,18 @@ export default function ArweaveCtxProvider({
 
   return (
     <ArweaveContext.Provider
-      value={{ arweave, warp, address, send, phishingList }}
+      value={{
+        arweave,
+        warp,
+        address,
+        send,
+        phishingList,
+        owner:
+          allowedAddresses.find(
+            (allowed: any) => allowed.address === address
+          ) !== undefined,
+        approveToBlacklist,
+      }}
     >
       {children}
     </ArweaveContext.Provider>

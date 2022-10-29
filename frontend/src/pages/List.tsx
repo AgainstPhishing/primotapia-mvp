@@ -5,12 +5,10 @@ import { ArweaveContext } from '../contexts/ArweaveContext';
 
 export default function List({}) {
   const { phishingList } = React.useContext(ArweaveContext);
-
+  // console.log('phishingList', Object.valeus(phishingList));
   return (
     <div>
-      <Container>
-        <TableComponent data={phishingList} />
-      </Container>
+      <TableComponent data={Object.values(phishingList)} />
     </div>
   );
 }
