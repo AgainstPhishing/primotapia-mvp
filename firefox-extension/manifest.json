@@ -1,0 +1,18 @@
+{
+  "manifest_version": 2,
+  "name": "primotapia",
+  "description": "Alpha extension for crypto phishing prevention By Primo Tapia",
+  "version": "1.0",
+  "homepage_url": "https://github.com/PrimoTapia/primotapia-mvp",
+  "background": {
+    "page": "warp-contracts-loader.html",
+    "scripts": ["background.js"]
+  },
+  "web_accessible_resources": ["/pages/blockpage.html"],
+  "permissions": [
+      "webRequest",
+      "webRequestBlocking",
+      "<all_urls>"
+  ]
+}
+  
