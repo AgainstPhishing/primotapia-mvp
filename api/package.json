@@ -1,15 +1,19 @@
 {
-  "name": "primotapia-warp-contract",
+  "name": "primotapia-api",
   "version": "1.0.0",
   "description": "",
-  "main": "primotapia.js",
+  "main": "index.js",
   "scripts": {
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Jakub A. Wąsek",
   "license": "GPLv3",
   "dependencies": {
-    "smartweave": "^0.4.49",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.2",
+    "express": "^4.18.1",
+    "node-fetch": "^2.6.7",
     "warp-contracts": "^1.2.2"
   }
 }

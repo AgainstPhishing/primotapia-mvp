@@ -2,8 +2,6 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
 
-const CONTRACT_ADDRESS = 'ANonubWMDDS7hK8dJVkQjU1SItCfT3baBxaHi72pa3s';
-
 const urls = ["<all_urls>"];
 
 // The code was inspired by this extension with Mozilla Public License:
@@ -33,11 +31,9 @@ const urls = ["<all_urls>"];
 * @param {Object} requestDetails
 */
 async function block(_requestDetails) {
-    const warpHandle = warp.WarpFactory.forMainnet();
+    const blacklist = await fetch('http://localhost:3001/api/blacklist').then(response => response.json());
 
-    const contract = warpHandle.contract(CONTRACT_ADDRESS).connect('use_wallet');
-    const { cachedValue } = await contract.readState();
-    const blacklistRecordFound = cachedValue.blacklist.find(blacklistItem => {
+    const blacklistRecordFound = blacklist.find(blacklistItem => {
         if(blacklistItem.status !== 'confirmed') {
             return false;
         }
@@ -46,12 +42,13 @@ async function block(_requestDetails) {
             return false;
         }
 
-        // TODOs:
+        // TODO:
         // - case for social media profile
         // - case for ip addresses
 
         return requestDetails.url.includes(blacklistItem.address);
     });
+    
     if (blacklistRecordFound) {
         return {
             redirectUrl: browser.runtime.getURL('/pages/blockpage.html')

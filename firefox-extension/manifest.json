@@ -5,7 +5,6 @@
   "version": "1.0",
   "homepage_url": "https://github.com/PrimoTapia/primotapia-mvp",
   "background": {
-    "page": "warp-contracts-loader.html",
     "scripts": ["background.js"]
   },
   "web_accessible_resources": ["/pages/blockpage.html"],
@@ -15,4 +14,3 @@
       "<all_urls>"
   ]
 }
-  

@@ -33,8 +33,8 @@ This is example smart contract of PRIMOTAPIA with comments.
       // reporter ArWeave address
       "reportedBy": "HgNHqGmSTDb4eSldvWntP6s8nUk8tCiSP9-1l76thEY",
       
-      // UNIX Timestamp
-      "reportedAt": "1666997666" 
+      // UNIX Timestamp - number
+      "reportedAt": 1666997666
     }
   ]
 }
