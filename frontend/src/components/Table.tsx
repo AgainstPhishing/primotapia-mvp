@@ -26,7 +26,7 @@ interface TableReviewsProps {
     status: string;
     description: string;
     reportedBy: string;
-    reportedAt: Date;
+    reportedAt: number;
     option: boolean;
   }[];
 }
@@ -53,7 +53,7 @@ export default function TableComponent({ data }: TableReviewsProps) {
         <td>{row.status}</td>
         <td>{row.description}</td>
         <td>{row.reportedBy}</td>
-        <td>{row.reportedAt.toLocaleString()}</td>
+        <td>{new Date(row.reportedAt * 1000).toLocaleDateString()}</td>
         {row.option ? (
           <td>
             <Button>Approve</Button>

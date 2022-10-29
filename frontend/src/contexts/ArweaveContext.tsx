@@ -26,6 +26,7 @@ export default function ArweaveCtxProvider({
     async function fetchData() {
       const contract = warp.contract(CONTRACT_ADDRESS).connect('use_wallet');
       const state = await contract.readState();
+      setPhisingList((state?.cachedValue?.state as any)['blacklist']);
       console.log('state', state);
     }
     fetchData();
