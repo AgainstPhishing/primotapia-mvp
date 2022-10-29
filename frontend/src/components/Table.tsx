@@ -108,15 +108,16 @@ export default function TableComponent({ data }: TableReviewsProps) {
               }}
               variant="outline"
             >
-              <IconCheck />
+              <IconCheck color="green" />
             </Button>
+            &nbsp;
             <Button
               variant="outline"
               onClick={() => {
                 rejectFromBlacklist(row.type, row.address);
               }}
             >
-              <IconCircleX />
+              <IconCircleX color="red" />
             </Button>
           </td>
         ) : (
@@ -128,9 +129,13 @@ export default function TableComponent({ data }: TableReviewsProps) {
 
   return (
     <ScrollArea>
-      <Table sx={{ minWidth: 800 }} verticalSpacing="xs">
+      <Table
+        sx={{ minWidth: 800 }}
+        verticalSpacing="xs"
+        style={{ border: '1px solid black', borderRadius: '15px' }}
+      >
         <thead>
-          <tr>
+          <tr style={{ backgroundColor: '#5facff' }}>
             <th>Address</th>
             <th>Type</th>
             <th>Status</th>

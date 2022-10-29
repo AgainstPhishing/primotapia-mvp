@@ -37,7 +37,7 @@ root.render(
             '#AD1374',
           ],
         },
-        primaryColor: 'brand',
+        primaryColor: 'blue',
       }}
       withGlobalStyles
       withNormalizeCSS

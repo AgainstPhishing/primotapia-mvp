@@ -1,118 +1,139 @@
-import * as React from 'react';
-import { createStyles, Container, Text, Button, Group } from '@mantine/core';
-import { GithubIcon } from '@mantine/ds';
-
-const BREAKPOINT = '@media (max-width: 755px)';
+import {
+  Title,
+  Text,
+  Container,
+  Button,
+  Overlay,
+  createStyles,
+} from '@mantine/core';
+import jumbotrom from '../assets/jumbotrom.png';
 
 const useStyles = createStyles((theme) => ({
   wrapper: {
     position: 'relative',
-    boxSizing: 'border-box',
-    // backgroundColor:
-    //   theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.white,
+    paddingBottom: 130,
+    backgroundImage: 'url(' + jumbotrom + ')',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+
+    '@media (max-width: 520px)': {
+      paddingTop: 80,
+      paddingBottom: 50,
+    },
+    height: '40vh',
   },
 
   inner: {
     position: 'relative',
-    // paddingTop: 200,
-    paddingBottom: 120,
-
-    [BREAKPOINT]: {
-      paddingBottom: 80,
-      paddingTop: 80,
-    },
+    zIndex: 1,
   },
 
   title: {
+    fontWeight: 800,
+    fontSize: 40,
+    letterSpacing: -1,
+    paddingLeft: theme.spacing.md,
+    paddingRight: theme.spacing.md,
+    color: theme.white,
+    marginBottom: theme.spacing.xs,
+    textAlign: 'center',
     fontFamily: `Greycliff CF, ${theme.fontFamily}`,
-    fontSize: 62,
-    fontWeight: 900,
-    lineHeight: 1.1,
-    margin: 0,
-    padding: 0,
-    color: theme.colorScheme === 'dark' ? theme.white : theme.black,
 
-    [BREAKPOINT]: {
-      fontSize: 42,
-      lineHeight: 1.2,
+    '@media (max-width: 520px)': {
+      fontSize: 28,
+      textAlign: 'left',
     },
   },
 
-  description: {
-    marginTop: theme.spacing.xl,
-    fontSize: 24,
+  highlight: {
+    color: theme.colors[theme.primaryColor][4],
+  },
 
-    [BREAKPOINT]: {
-      fontSize: 18,
+  description: {
+    color: theme.colors.gray[0],
+    textAlign: 'center',
+
+    '@media (max-width: 520px)': {
+      fontSize: theme.fontSizes.md,
+      textAlign: 'left',
     },
   },
 
   controls: {
-    marginTop: theme.spacing.xl * 2,
+    marginTop: theme.spacing.xl * 1.5,
+    display: 'flex',
+    justifyContent: 'center',
+    paddingLeft: theme.spacing.md,
+    paddingRight: theme.spacing.md,
 
-    [BREAKPOINT]: {
-      marginTop: theme.spacing.xl,
+    '@media (max-width: 520px)': {
+      flexDirection: 'column',
     },
   },
 
   control: {
-    height: 54,
-    paddingLeft: 38,
-    paddingRight: 38,
+    height: 42,
+    fontSize: theme.fontSizes.md,
 
-    [BREAKPOINT]: {
-      height: 54,
-      paddingLeft: 18,
-      paddingRight: 18,
-      flex: 1,
+    '&:not(:first-of-type)': {
+      marginLeft: theme.spacing.md,
+    },
+
+    '@media (max-width: 520px)': {
+      '&:not(:first-of-type)': {
+        marginTop: theme.spacing.md,
+        marginLeft: 0,
+      },
+    },
+  },
+
+  secondaryControl: {
+    color: theme.white,
+    backgroundColor: 'rgba(255, 255, 255, .5)',
+
+    '&:hover': {
+      backgroundColor: 'rgba(255, 255, 255, .45) !important',
     },
   },
 }));
 
 export function LandingPage() {
-  const { classes } = useStyles();
+  const { classes, cx } = useStyles();
 
   return (
     <div className={classes.wrapper}>
-      <Container size={700} className={classes.inner}>
-        <h1 className={classes.title}>
-          <Text
-            component="span"
-            variant="gradient"
-            gradient={{ from: 'blue', to: 'cyan' }}
-            inherit
-          >
+      <Overlay color="#000" opacity={0.75} zIndex={1} />
+
+      <div className={classes.inner}>
+        <Title className={classes.title}>
+          <Text component="span" inherit className={classes.highlight}>
+            <br />
             Decentralized Phishing Prevention
-          </Text>{' '}
-        </h1>
+          </Text>
+        </Title>
 
-        <Text className={classes.description} color="dimmed">
-          A tool to keep the web3 ecosystem safe and keeps growing onboarding
-          more users with the same security level using blockchain
-        </Text>
+        <Container size={640}>
+          <Text size="lg" className={classes.description}>
+            A tool to keep the web3 ecosystem safe and keeps growing onboarding
+            more users with the same security level using blockchain
+          </Text>
+        </Container>
 
-        <Group className={classes.controls}>
-          <Button
-            size="xl"
-            className={classes.control}
-            variant="gradient"
-            gradient={{ from: 'blue', to: 'cyan' }}
-          >
-            Get started
+        <div className={classes.controls}>
+          <Button className={classes.control} variant="white" size="lg">
+            Get Browser Extension
           </Button>
-
           <Button
-            component="a"
-            href="https://github.com/mantinedev/mantine"
-            size="xl"
-            variant="default"
+            // className={cx(classes.control, classes.secondaryControl)}
+
             className={classes.control}
-            leftIcon={<GithubIcon size={20} />}
+            variant="white"
+            size="lg"
           >
-            GitHub
+            Install Metamask Snap
           </Button>
-        </Group>
-      </Container>
+        </div>
+      </div>
     </div>
   );
 }

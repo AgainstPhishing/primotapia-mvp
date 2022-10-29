@@ -1,6 +1,7 @@
 import * as React from 'react';
 import Arweave from 'arweave';
 import { WarpFactory } from 'warp-contracts';
+import Swal from 'sweetalert2';
 
 export const ArweaveContext = React.createContext<any>({});
 
@@ -48,6 +49,7 @@ export default function ArweaveCtxProvider({
       })
       .then((originalTxId: any) => {
         console.log('rejectFromBlacklist | originalTxId', originalTxId);
+        Swal.fire('Success!', 'Rejected Successfully!', 'success');
       });
   }
 
@@ -61,6 +63,7 @@ export default function ArweaveCtxProvider({
       })
       .then((originalTxId: any) => {
         console.log('approveToBlacklist | originalTxId', originalTxId);
+        Swal.fire('Success!', 'Approved Successfully!', 'success');
       });
   }
 
@@ -75,6 +78,7 @@ export default function ArweaveCtxProvider({
       })
       .then((originalTxId: any) => {
         console.log('addToBlacklist | originalTxId', originalTxId);
+        Swal.fire('Success!', 'Reported Successfully!', 'success');
       });
   }
 
