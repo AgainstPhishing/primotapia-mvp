@@ -14,9 +14,11 @@ import {
   IconCheck,
   IconCircleX,
   IconNumbers,
+  IconPlus,
   IconSocial,
   IconWallet,
   IconWorldWww,
+  IconX,
 } from '@tabler/icons';
 
 const useStyles = createStyles((theme) => ({
@@ -49,7 +51,12 @@ const typeIcons: Record<string, any> = {
   IP: <IconNumbers />,
   'social media': <IconSocial />,
 };
-const statusIcons = {};
+
+const statusIcons: Record<string, any> = {
+  confirmed: <IconCheck color="green" />,
+  rejected: <IconX color="red" />,
+  reported: <IconPlus color="orange" />,
+};
 
 export default function TableComponent({ data }: TableReviewsProps) {
   const { classes, theme } = useStyles();
@@ -62,7 +69,7 @@ export default function TableComponent({ data }: TableReviewsProps) {
     // const negativeReviews = (row.reviews.negative / totalReviews) * 100;
 
     return (
-      <tr key={row.address}>
+      <tr key={row.address + '-' + row.reportedAt}>
         <td>
           <Anchor<'a'>
             href={`https://viewblock.io/arweave/address/${row.address}`}
@@ -77,14 +84,13 @@ export default function TableComponent({ data }: TableReviewsProps) {
         </td>
         <td>
           <Group>
-            {row.type} {typeIcons[row.type]}
+            <span title={row.type}>{typeIcons[row.type]}</span>
           </Group>
         </td>
-        <td>{row.status}</td>
         <td>
-          <Text></Text>
-          {row.description}
+          <span title={row.status}>{statusIcons[row.status]}</span>
         </td>
+        <td>{row.description}</td>
         <td>
           {`${row.reportedBy.slice(0, 12)}...${row.reportedBy.slice(
             row.reportedBy.length - 4,
@@ -112,7 +118,7 @@ export default function TableComponent({ data }: TableReviewsProps) {
             </Button>
           </td>
         ) : (
-          <></>
+          <td></td>
         )}
       </tr>
     );
@@ -129,7 +135,7 @@ export default function TableComponent({ data }: TableReviewsProps) {
             <th>Description</th>
             <th>Created By</th>
             <th>Created At</th>
-            {/* <th>Option</th> */}
+            {owner ? <th>Option</th> : ''}
           </tr>
         </thead>
         <tbody>{rows}</tbody>
