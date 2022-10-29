@@ -57,7 +57,7 @@ export default function TableComponent({ data }: TableReviewsProps) {
         <td>{row.description}</td>
         <td>{row.reportedBy}</td>
         <td>{new Date(row.reportedAt * 1000).toLocaleDateString()}</td>
-        {owner ? (
+        {owner && row.status === 'reported' ? (
           <td>
             <Button
               fullWidth
