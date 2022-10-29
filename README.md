@@ -1,14 +1,23 @@
 # PrimoTapia MVP
 
-### API
+### API - /api/
 
-The api is used by browser extension to get blacklist data from the smart contract.
+API is currently used by:
+- browser extension
+- metamask snap
 
-### frontend
+to get blacklist with confirmed records from WARP Smart Contract.
+
+### Frontend
 TODO...
 
 ### contract
 TODO...
 
-### firefox-extension
-TODO...
+### WebExtension
+
+It's a prototype of browser extension which integrate WARP Smart Contract data with a browser to protest users from phishing.
+
+### WARP Smart contract address
+
+**ANonubWMDDS7hK8dJVkQjU1SItCfT3baBxaHi72pa3s**
