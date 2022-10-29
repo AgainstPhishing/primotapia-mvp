@@ -120,15 +120,27 @@ export function LandingPage() {
         </Container>
 
         <div className={classes.controls}>
-          <Button className={classes.control} variant="white" size="lg">
+          <Button
+            className={classes.control}
+            variant="white"
+            size="lg"
+            onClick={() => {
+              window.open(
+                'https://github.com/PrimoTapia/primotapia-mvp/tree/main/webextension',
+                '_blank'
+              );
+            }}
+          >
             Get Browser Extension
           </Button>
           <Button
             // className={cx(classes.control, classes.secondaryControl)}
-
             className={classes.control}
             variant="white"
             size="lg"
+            onClick={() => {
+              window.open('http://localhost:8000', '_blank');
+            }}
           >
             Install Metamask Snap
           </Button>

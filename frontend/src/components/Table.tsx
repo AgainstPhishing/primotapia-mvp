@@ -120,9 +120,7 @@ export default function TableComponent({ data }: TableReviewsProps) {
               <IconCircleX color="red" />
             </Button>
           </td>
-        ) : (
-          <td></td>
-        )}
+        ) : null}
       </tr>
     );
   });
@@ -142,7 +140,7 @@ export default function TableComponent({ data }: TableReviewsProps) {
             <th>Description</th>
             <th>Created By</th>
             <th>Created At</th>
-            {owner ? <th>Option</th> : ''}
+            {owner ? <th>Actions</th> : null}
           </tr>
         </thead>
         <tbody>{rows}</tbody>

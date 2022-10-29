@@ -14,7 +14,7 @@ export default function ArweaveCtxProvider({
   const [allowedAddresses, setAllowedAddresses] = React.useState([]);
   const [phishingList, setPhisingList] = React.useState([]);
 
-  const CONTRACT_ADDRESS = 'ANonubWMDDS7hK8dJVkQjU1SItCfT3baBxaHi72pa3s';
+  const CONTRACT_ADDRESS = 'LoR8ujVUO0PDll-pbFMuvXRVXKtLjXAYjXqH_pFgmk8';
 
   const arweave = Arweave.init({
     host: 'arweave.net',
@@ -24,21 +24,27 @@ export default function ArweaveCtxProvider({
 
   const warp = WarpFactory.forMainnet();
 
+  async function fetchData() {
+    const contract = warp.contract(CONTRACT_ADDRESS);
+    const state = await contract.readState();
+    setPhisingList(
+      Object.values((state?.cachedValue?.state as any)['blacklist'])
+    );
+    setAllowedAddresses((state?.cachedValue?.state as any)['allowedAddresses']);
+    console.log('state', state);
+  }
   React.useEffect(() => {
-    async function fetchData() {
-      const contract = warp.contract(CONTRACT_ADDRESS).connect('use_wallet');
-      const state = await contract.readState();
-      setPhisingList(
-        Object.values((state?.cachedValue?.state as any)['blacklist'])
-      );
-      setAllowedAddresses(
-        (state?.cachedValue?.state as any)['allowedAddresses']
-      );
-      console.log('state', state);
-    }
     fetchData();
   }, []);
 
+  React.useEffect(() => {
+    fetchData();
+  }, [address]);
+
+  async function connect() {
+    arweave.wallets.getAddress().then((address) => setAddress(address));
+    fetchData();
+  }
   async function rejectFromBlacklist(type: string, address: string) {
     const contract = warp.contract(CONTRACT_ADDRESS).connect('use_wallet');
     contract
@@ -50,6 +56,7 @@ export default function ArweaveCtxProvider({
       .then((originalTxId: any) => {
         console.log('rejectFromBlacklist | originalTxId', originalTxId);
         Swal.fire('Success!', 'Rejected Successfully!', 'success');
+        fetchData();
       });
   }
 
@@ -64,6 +71,7 @@ export default function ArweaveCtxProvider({
       .then((originalTxId: any) => {
         console.log('approveToBlacklist | originalTxId', originalTxId);
         Swal.fire('Success!', 'Approved Successfully!', 'success');
+        fetchData();
       });
   }
 
@@ -79,12 +87,9 @@ export default function ArweaveCtxProvider({
       .then((originalTxId: any) => {
         console.log('addToBlacklist | originalTxId', originalTxId);
         Swal.fire('Success!', 'Reported Successfully!', 'success');
+        fetchData();
       });
   }
-
-  React.useEffect(() => {
-    arweave.wallets.getAddress().then((address) => setAddress(address));
-  }, [arweave]);
 
   return (
     <ArweaveContext.Provider
@@ -100,6 +105,7 @@ export default function ArweaveCtxProvider({
           ) !== undefined,
         approveToBlacklist,
         rejectFromBlacklist,
+        connect,
       }}
     >
       {children}

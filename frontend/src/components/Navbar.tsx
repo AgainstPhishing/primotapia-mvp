@@ -134,7 +134,7 @@ export default function Navbar() {
     useDisclosure(false);
   const [linksOpened, { toggle: toggleLinks }] = useDisclosure(false);
   const { classes, theme } = useStyles();
-  const { address } = React.useContext(ArweaveContext);
+  const { address, connect } = React.useContext(ArweaveContext);
 
   const links = mockdata.map((item) => (
     <UnstyledButton className={classes.subLink} key={item.title}>
@@ -190,6 +190,7 @@ export default function Navbar() {
             ) : (
               <Button
                 onClick={() => {
+                  connect();
                   //   contract
                   //     .writeInteraction({
                   //       function: 'addAnnouncement',
