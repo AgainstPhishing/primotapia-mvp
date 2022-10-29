@@ -56,6 +56,9 @@ yarn install
 yarn start
 ```
 
+The code is located on this file: 
+
+https://github.com/PrimoTapia/primotapia-mvp/blob/main/metamask-snap/packages/snap/src/index.ts#L1-L32
 
 ### WebExtension for firefox - /webextension
 
