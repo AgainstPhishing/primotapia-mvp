@@ -161,7 +161,7 @@ export default function Navbar() {
           <Link to="/" style={{ textDecoration: 'none' }}>
             <Group>
               <Image src={logo} width="40px" color="white" />
-              <Text>Primotopia</Text>
+              <Text>Primotapia</Text>
             </Group>
           </Link>
 
