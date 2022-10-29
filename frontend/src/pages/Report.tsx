@@ -8,6 +8,7 @@ import {
   SimpleGrid,
   Textarea,
   TextInput,
+  Title,
 } from '@mantine/core';
 import { DatePicker } from '@mantine/dates';
 import { ArweaveContext } from '../contexts/ArweaveContext';
@@ -42,8 +43,18 @@ export default function Report() {
 
   return (
     <div>
-      <Container>
-        <SimpleGrid>
+      <Container mt={'50px'} mb="80px">
+        <Title
+          order={2}
+          size="h1"
+          sx={(theme) => ({ fontFamily: `Greycliff CF, ${theme.fontFamily}` })}
+          weight={900}
+          align="center"
+        >
+          Report a Scam
+        </Title>
+
+        <SimpleGrid mt={'30px'}>
           <Grid gutter={'md'}>
             <Grid.Col xs={10}>
               <TextInput

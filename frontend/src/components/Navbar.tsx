@@ -155,13 +155,13 @@ export default function Navbar() {
   ));
 
   return (
-    <Box pb={120}>
+    <Box>
       <Header height={60} px="md">
         <Group position="apart" sx={{ height: '100%' }}>
           <Link to="/" style={{ textDecoration: 'none' }}>
             <Group>
               <Image src={logo} width="40px" color="white" />
-              <Text>Primotapia</Text>
+              <Text color={'black'}>PrimoTapia</Text>
             </Group>
           </Link>
 
@@ -170,12 +170,12 @@ export default function Navbar() {
             spacing={0}
             className={classes.hiddenMobile}
           >
-            <Link to="/list" className={classes.link}>
+            {/* <Link to="/list" className={classes.link}>
               Home
             </Link>
             <Link to="/report" className={classes.link}>
-              Report
-            </Link>
+              Report Phishing
+            </Link> */}
           </Group>
 
           <Group className={classes.hiddenMobile}>
@@ -228,12 +228,12 @@ export default function Navbar() {
             color={theme.colorScheme === 'dark' ? 'dark.5' : 'gray.1'}
           />
 
-          <a href="/list" className={classes.link}>
+          {/* <a href="/list" className={classes.link}>
             Home
           </a>
           <a href="/report" className={classes.link}>
-            Report
-          </a>
+            Report Phishing
+          </a> */}
 
           <Divider
             my="sm"
