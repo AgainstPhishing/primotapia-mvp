@@ -1,3 +1,3 @@
 #!/bin/bash
-rm ../firefox-extension.xpi
-zip -r ../firefox-extension.xpi ./*
+rm ../webextension.xpi
+zip -r ../webextension.xpi ./*
