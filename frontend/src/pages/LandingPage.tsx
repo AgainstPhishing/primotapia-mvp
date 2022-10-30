@@ -11,7 +11,7 @@ import jumbotrom from '../assets/jumbotrom.png';
 const useStyles = createStyles((theme) => ({
   wrapper: {
     position: 'relative',
-    paddingBottom: 130,
+    paddingBottom: 60,
     backgroundImage: 'url(' + jumbotrom + ')',
     backgroundSize: 'cover',
     backgroundPosition: 'center',
@@ -20,7 +20,7 @@ const useStyles = createStyles((theme) => ({
       paddingTop: 80,
       paddingBottom: 50,
     },
-    height: '40vh',
+    height: 'auto',
   },
 
   inner: {
