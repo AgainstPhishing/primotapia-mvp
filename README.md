@@ -2,6 +2,11 @@
 
 This repository contains prototype of PrimoTapia - Decentralized project and wallet agnostic phishing prevention system.
 
+![Primo Tapia slide](./doc/Primo%20Tapia.png "Primo Tapia slide")
+
+## Architecture
+![Primo Tapia architecture](./doc/Primo%20Tapia%20-%20architecture.png "Primo Tapia architecture")
+
 ### WARP Smart contract - /contracts
 
 It's a heart of the app. The WARP Smart Contract manage database with:
@@ -27,7 +32,7 @@ npm install
 npm start
 ```
 
-### Web WARP Smart contract interface - /frontend
+### (dApp) Web WARP Smart contract interface - /frontend
 
 It's a web app for interacting with WARP Smart Contract.
 
@@ -70,18 +75,16 @@ It's a prototype of browser extension which integrate WARP Smart Contract data w
 
 ## How to run the project
 
-First of all, you need to run the API locally, and you can do that by running the following commands:
-
-Before running the api, you need to create a copy of `.env.example` to `.env` with  the following contract address:
+Firstly, you need to run API. Before running, you need to create a copy of `.env.example` to `.env` with  the following contract address:
 
 `LoR8ujVUO0PDll-pbFMuvXRVXKtLjXAYjXqH_pFgmk8`
 
-Then you can run
+Next, you need to run the API locally, and you can do that by running the following commands:
 
-```
-cd api
-npm install
-npm start
+```bash
+$ cd api
+$ npm install
+$ npm start
 ```
 
 Once you have that done, you can run the frontend locally, and to interact with the website you will need the ARConnect browser extension to interact with ARWeave (https://www.arconnect.io/)
